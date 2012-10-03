@@ -24,7 +24,7 @@ drawImage(string image) {
 			integer i;
 			
 			//And loop through all the prims and have them set their colour as appropriate
-			for(i = llGetObjectPrimCount(llGetKey()); i > 1; i --) {
+			for(i = 65; i > 1; i --) {
 				if(llGetSubString(data, 65-i, 65-i) == "1") {
 					llSetLinkColor(i, <1, 0, 0>, ALL_SIDES);
 				}else{

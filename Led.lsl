@@ -10,6 +10,9 @@ list DISPLAYS = [
 	"stripes:1010101010101010101010101010101010101010101010101010101010101010"
 ];
 
+//Start index
+integer START = 7;
+
 //Display an image
 drawImage(string image) {
 	//Loop through all images looking for one with the name we want
@@ -24,11 +27,11 @@ drawImage(string image) {
 			integer i;
 			
 			//And loop through all the prims and have them set their colour as appropriate
-			for(i = 65; i > 1; i --) {
+			for(i = START+65; i > START; i --) {
 				if(llGetSubString(data, 65-i, 65-i) == "1") {
-					llSetLinkColor(i, <1, 0, 0>, ALL_SIDES);
+					llSetLinkColor(START+i, <1, 0, 0>, ALL_SIDES);
 				}else{
-					llSetLinkColor(i, <0, 0, 0>, ALL_SIDES);
+					llSetLinkColor(START+i, <0, 0, 0>, ALL_SIDES);
 				}
 			}
 		}

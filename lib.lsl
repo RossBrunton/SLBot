@@ -6,6 +6,10 @@
 //Seperator for data passed between components
 string SEPERATION_CHAR = "\t";
 
+//Creator data
+key CREATOR = "7603f799-3e62-429e-9388-f1cf54cb0a0d";
+string CREATOR_NAME = "SavageWolf8 Resident";
+
 //I can't find any function that will allow you to modify elements of an array in place, so I'll have to do this...
 //This function replaces element n with new.
 //// base - The source array
@@ -61,6 +65,13 @@ integer swA2I(string message, integer index) {
 //// args - A list of arguments to send with the message
 swBroadcast(string command, list args) {
 	llMessageLinked(LINK_ALL_OTHERS, 0, command+SEPERATION_CHAR+llDumpList2String(args, SEPERATION_CHAR), NULL_KEY);
+}
+
+//Broadcasts a message to all other objects. Will be sent to the caller
+//// command - The command to request other components to run.
+//// args - A list of arguments to send with the message
+swBroadcastAll(string command, list args) {
+	llMessageLinked(LINK_SET, 0, command+SEPERATION_CHAR+llDumpList2String(args, SEPERATION_CHAR), NULL_KEY);
 }
 
 ////End lib.lsl

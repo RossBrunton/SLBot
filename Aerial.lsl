@@ -6,7 +6,7 @@
 default {
 	state_entry() {
 		llListen(0, "", "", "");
-    }
+	}
 
 	listen(integer channel, string name, key id, string message) {
 		//Check we have not said the message ourself
@@ -17,8 +17,8 @@ default {
 			}
 		}
         
-        //Broadcast the message to other components
-        swBroadcast("INPUT", [message]);
+		//Broadcast the message to other components
+		swBroadcast("INPUT", [message]);
 	}
 }
 

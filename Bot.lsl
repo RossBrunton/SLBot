@@ -4,13 +4,50 @@
 // Contains functions and state definition needed for the main bot unit
 
 list help = [];
+integer on = FALSE;
+
+key ownerKey = NULL_KEY;
+string ownerName = "";
+
+setCoreColour(string toSet) {
+	vector colour;
+	
+	if(toSet == "green") {
+		colour = <0.3, 1.0, 0.3>;
+	}else if(toSet == "blue") {
+		colour = <0.3, 0.3, 1.0>;
+	}else if(toSet == "red") {
+		colour = <1.0, 0.3, 0.3>;
+	}else if(toSet == "cyan") {
+		colour = <0.3, 1.0, 1.0>;
+	}else if(toSet == "magenta") {
+		colour = <1.0, 0.3, 1.0>;
+	}else if(toSet == "yellow") {
+		colour = <1.0, 1.0, 0.3>;
+	}
+	
+	llSetPrimitiveParams([PRIM_COLOR, ALL_SIDES, colour, 0.2, PRIM_POINT_LIGHT, TRUE, colour, 0.7, 10.0, 0.0]);
+	
+}
 
 default {
 	state_entry() {
 		swBroadcastAll("SETHELP", ["!say text1 [[text2] ...] - Say the arguments."]);
 		swBroadcastAll("SETHELP", ["!shout text1 [[text2] ...] - Shout the arguments."]);
 		swBroadcastAll("SETHELP", ["!creator - Information about creator."]);
+		swBroadcastAll("SETHELP", ["!colour [colour] - Change colour of bot."]);
 		swBroadcast("BOOT", []);
+		
+		llListen(1, "", NULL_KEY, "");
+	}
+	
+	listen(integer channel, string name, key id, string msg) {
+		if(swDecodeCommand(msg) == "STARTUP" && on == FALSE) {
+			ownerKey = (key)swA2S(msg, 0);
+			ownerName = swA2S(msg, 1);
+			setCoreColour(llToLower(swA2S(msg, 2)));
+			on = TRUE;
+		}
 	}
 	
 	link_message(integer sender_num, integer num, string str, key id){
@@ -70,6 +107,17 @@ default {
 			//Creator info
 			if(commandName == "creator") {
 				llSay(0, "Some second life robot created by Ross Brunton ("+CREATOR_NAME+") for the Interactive Systems pet project thing.");
+			}
+			
+			//Colours
+			if(commandName == "colour" || commandName == "color") {
+				setCoreColour(llToLower(llList2String(args, 0)));
+			}
+			
+			//Super secret turning off
+			if(commandName == "to") {
+				setCoreColour("");
+				on = FALSE;
 			}
 		}
 		

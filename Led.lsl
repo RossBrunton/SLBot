@@ -11,37 +11,52 @@ list DISPLAYS = [
 ];
 
 //Start index
-integer START = 7;
+integer START = 74;
 
 //Display an image
 drawImage(string image) {
-	//Loop through all images looking for one with the name we want
-	integer d;
-	for(d = llGetListLength(DISPLAYS)-1; d >= 0; d --) {
-		//Break apart the string into a list, containing [name, data]
-		list fragments = llParseString2List(llList2String(DISPLAYS, d), [":"], []);
-		
-		if(llList2String(fragments, 0) == image) {
-			//Yes, we found one, now get it's data!
-			string data = llList2String(fragments, 1);
-			integer i;
-			
-			//And loop through all the prims and have them set their colour as appropriate
-			for(i = START+65; i > START; i --) {
-				if(llGetSubString(data, 65-i, 65-i) == "1") {
-					llSetLinkColor(START+i, <1, 0, 0>, ALL_SIDES);
-				}else{
-					llSetLinkColor(START+i, <0, 0, 0>, ALL_SIDES);
-				}
-			}
-		}
-	}
+    //Loop through all images looking for one with the name we want
+    integer d;
+    for(d = llGetListLength(DISPLAYS)-1; d >= 0; d --) {
+        //Break apart the string into a list, containing [name, data]
+        list fragments = llParseString2List(llList2String(DISPLAYS, d), [":"], []);
+        
+        if(llList2String(fragments, 0) == image) {
+            //Yes, we found one, now get it's data!
+            string data = llList2String(fragments, 1);
+            integer i;
+            
+            //And loop through all the prims and have them set their colour as appropriate
+            for(i = 65; i >= 0; i --) {
+                if(llGetSubString(data, 65-i, 65-i) == "1") {
+                    llSetLinkColor(START-i, <1, 0, 0>, ALL_SIDES);
+                }else{
+                    llSetLinkColor(START-i, <0, 0, 0>, ALL_SIDES);
+                }
+            }
+        }
+    }
 }
 
-//Much of this is placeholder stuff
+
 default {
 	state_entry() {
 		drawImage("blank");
+	}
+	
+	link_message(integer sender_num, integer num, string str, key id){
+		if(swDecodeCommand(str) == "CMD_IMG" || swDecodeCommand(str) == "IMG") {
+			drawImage(swA2S(str, 0));
+		}
+		
+		if(swDecodeCommand(str) == "BOOT") {
+			swBroadcast("SETHELP", ["!img [image] - Display an image."]);
+			drawImage("blank");
+		}
+	}
+	
+	on_rez(integer param) {
+		llResetScript();
 	}
 }
 

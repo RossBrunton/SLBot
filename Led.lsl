@@ -3,15 +3,30 @@
 // Part of bot pet thing.
 // Contains functions and state definition needed for the LED display
 
+//From: http://wiki.secondlife.com/wiki/StringReverse
+string uStringReverse( string vStrSrc ){
+    integer vIntCnt = llStringLength( vStrSrc );
+    while (vIntCnt){
+        vStrSrc += llGetSubString( vStrSrc, (vIntCnt = ~-vIntCnt), vIntCnt );
+    }
+    return llGetSubString( vStrSrc, llStringLength( vStrSrc ) >> 1, 0xFFFFFFFF );
+}
+/*//--                       Anti-License Text                         --//*/
+/*//     Contributed Freely to the Public Domain without limitation.     //*/
+/*//   2009 (CC0) [ http://creativecommons.org/publicdomain/zero/1.0 ]   //*/
+/*//  Void Singer [ https://wiki.secondlife.com/wiki/User:Void_Singer ]  //*/
+/*//--                                                                 --//*/
+
 //List of all the LED displays
 list DISPLAYS = [
 	"blank:0000000000000000000000000000000000000000000000000000000000000000",
 	"borders:1111111100000000000000000000000000000000000000000000000011111111",
-	"stripes:1010101010101010101010101010101010101010101010101010101010101010"
+	"stripes:1010101010101010101010101010101010101010101010101010101010101010",
+	"creeper:0000000001100110011001100001100000111100001111000010010000000000"
 ];
 
 //Start index
-integer START = 74;
+integer START = 75;
 
 //Display an image
 drawImage(string image) {
@@ -23,7 +38,7 @@ drawImage(string image) {
         
         if(llList2String(fragments, 0) == image) {
             //Yes, we found one, now get it's data!
-            string data = llList2String(fragments, 1);
+            string data = uStringReverse(llList2String(fragments, 1));
             integer i;
             
             //And loop through all the prims and have them set their colour as appropriate

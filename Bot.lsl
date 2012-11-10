@@ -9,6 +9,14 @@ integer on = FALSE;
 key ownerKey = NULL_KEY;
 string ownerName = "";
 
+integer checkPermission(key toCheck) {
+	if(toCheck == CREATOR || toCheck == ownerKey) {
+		return TRUE;
+	}else{
+		return FALSE;
+	}
+}
+
 setCoreColour(string toSet) {
 	vector colour;
 	
@@ -109,6 +117,35 @@ default {
 				llSay(0, "Some second life robot created by Ross Brunton ("+CREATOR_NAME+") for the Interactive Systems pet project thing.");
 			}
 			
+			//Owner info
+			//Note that this does not work for setting owner; it sets it to the user who said the message
+			if(commandName == "owner") {
+				if(llGetListLength(args) > 0 && checkPermission(swA2K(str, 1))) {
+					ownerKey = swA2K(str, 1);
+					ownerName = llKey2Name(ownerKey);
+				}
+				llSay(0, "This bot is owned by "+ownerName+".");
+			}
+			
+			if(commandName == "ownerKey") {
+				llSay(0, (string)ownerKey);
+			}
+			
+			//Death, I may make this fancier in the future
+			if(commandName == "die") {
+				llDie();
+			}
+			
+			//Following
+			if(commandName == "follow") {
+				swBroadcast("FOLLOW", [(string)ownerKey]);
+			}
+			
+			//Stay
+			if(commandName == "stay") {
+				swBroadcast("STAY", []);
+			}
+			
 			//Colours
 			if(commandName == "colour" || commandName == "color") {
 				setCoreColour(llToLower(llList2String(args, 0)));
@@ -123,6 +160,10 @@ default {
 		
 		if(swDecodeCommand(str) == "SETHELP") {
 			help += [swA2S(str, 0)];
+		}
+		
+		if(swDecodeCommand(str) == "POS") {
+			llSetPos(swA2V(str, 0));
 		}
 	}
 	

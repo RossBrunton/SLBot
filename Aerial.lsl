@@ -18,7 +18,7 @@ default {
 		}
         
 		//Broadcast the message to other components
-		swBroadcast("INPUT", [message]);
+		swBroadcast("INPUT", [message, (string)id]);
 	}
 }
 

@@ -28,7 +28,7 @@ list swCutStr(string str, string cutter) {
 	return llParseString2List(str, [cutter], []);
 }
 
-//Parses a string that is a message and gets it's command, returns "INVALID" if the string cannot be parsed
+//Parses a string that is a message and gets its command, returns "INVALID" if the string cannot be parsed
 //Not complete, doesn't validate
 //// message - A message from another bot component
 //// return - The name of the command that was requested, or "INVALID"
@@ -55,9 +55,30 @@ string swA2S(string message, integer index) {
 
 //// message - A message from another bot component
 //// index - The number of the argument to return
+//// return - The argument in the indexth position, converted to key
+key swA2K(string message, integer index) {
+	return llList2Key(swDecodeArgs(message), index);
+}
+
+//// message - A message from another bot component
+//// index - The number of the argument to return
 //// return - The argument in the indexth position, converted to integer
 integer swA2I(string message, integer index) {
 	return llList2Integer(swDecodeArgs(message), index);
+}
+
+//// message - A message from another bot component
+//// index - The number of the argument to return
+//// return - The argument in the indexth position, converted to vector
+vector swA2V(string message, integer index) {
+	return (vector)llList2String(swDecodeArgs(message), index);
+}
+
+//Creates a message, but does not broadcast it
+//// command - The command to request other components to run.
+//// args - A list of arguments to send with the message
+string swBroadcastCreate(string command, list args) {
+	return command+SEPERATION_CHAR+llDumpList2String(args, SEPERATION_CHAR);
 }
 
 //Broadcasts a message to all other objects. Will not be sent to the caller

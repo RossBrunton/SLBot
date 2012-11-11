@@ -43,8 +43,11 @@ default {
 		swBroadcastAll("SETHELP", ["!say text1 [[text2] ...] - Say the arguments."]);
 		swBroadcastAll("SETHELP", ["!shout text1 [[text2] ...] - Shout the arguments."]);
 		swBroadcastAll("SETHELP", ["!creator - Information about creator."]);
+		swBroadcastAll("SETHELP", ["!owner - Says who owns the bot."]);
+		swBroadcastAll("SETHELP", ["!die - Bot is removed, and dies."]);
 		swBroadcastAll("SETHELP", ["!colour [colour] - Change colour of bot."]);
 		swBroadcast("BOOT", []);
+		
 		
 		llListen(1, "", NULL_KEY, "");
 	}
@@ -54,6 +57,8 @@ default {
 			ownerKey = (key)swA2S(msg, 0);
 			ownerName = swA2S(msg, 1);
 			setCoreColour(llToLower(swA2S(msg, 2)));
+			swBroadcast("FOLLOW", [(string)ownerKey]);
+			swBroadcast("IMG", ["blank"]);
 			on = TRUE;
 		}
 	}
@@ -108,7 +113,7 @@ default {
 				llSay(0, "-- List of Commands --");
 				integer i;
 				for(i = 0; i < llGetListLength(help); i ++) {
-					llSay(0, llList2String(help, i));
+					llSay(0, "| "+llList2String(help, i));
 				}
 			}
 			
@@ -118,12 +123,7 @@ default {
 			}
 			
 			//Owner info
-			//Note that this does not work for setting owner; it sets it to the user who said the message
 			if(commandName == "owner") {
-				if(llGetListLength(args) > 0 && checkPermission(swA2K(str, 1))) {
-					ownerKey = swA2K(str, 1);
-					ownerName = llKey2Name(ownerKey);
-				}
 				llSay(0, "This bot is owned by "+ownerName+".");
 			}
 			
@@ -131,8 +131,10 @@ default {
 				llSay(0, (string)ownerKey);
 			}
 			
-			//Death, I may make this fancier in the future
-			if(commandName == "die") {
+			//Death
+			if(commandName == "die" && checkPermission(swA2K(str, 1))) {
+				llRezObject("Dead Bot", llGetPos(), ZERO_VECTOR, llGetRot(), FALSE);
+				llWhisper(1, "BOTDIE");
 				llDie();
 			}
 			
@@ -155,6 +157,8 @@ default {
 			if(commandName == "to") {
 				setCoreColour("");
 				on = FALSE;
+				swBroadcast("STAY", []);
+				swBroadcast("IMG", ["boot"]);
 			}
 		}
 		

@@ -4,7 +4,7 @@
 // Dispenses robots
 
 dispenseRobot() {
-	llRezObject("Bot", llGetPos(), <-1.0, 0.0, -1.0>, <0.0, 0.0, 0.0, 0.0>, 0);
+	llRezObject("Bot", llGetPos(), <0.0, 0.0, 0.0>, <0.0, 0.0, 0.0, 0.0>, 0);
 }
 
 default {
@@ -19,6 +19,7 @@ default {
 
 	listen(integer channel, string name, key id, string message) {
 		dispenseRobot();
+		llSleep(4.0);
 		llSay(1, "STARTUP\t"+(string)id+"\t"+name+"\t"+message);
 	}
 }

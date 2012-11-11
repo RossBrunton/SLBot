@@ -1,0 +1,106 @@
+<html>
+	<head>
+		<script>
+			function image() {
+				hold = "";
+				for(var x = 0; x < 8; x++) {
+					for(var y = 0; y < 8; y++) {
+						if(document.getElementById("cell"+x+","+y).style.backgroundColor == "red") 
+							hold += "1";
+						else
+							hold += "0"
+					}
+				}
+				
+				console.log(hold);
+			}
+		</script>
+	</head>
+	
+	<body>
+		<center>
+		<table id='tab'>
+			<tr id='row0'>
+				<td id='cell0,0' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell0,1' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell0,2' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell0,3' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell0,4' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell0,5' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell0,6' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell0,7' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+			</tr>
+			<tr id='row1'>
+				<td id='cell1,0' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell1,1' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell1,2' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell1,3' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell1,4' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell1,5' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell1,6' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell1,7' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+			</tr>
+			<tr id='row2'>
+				<td id='cell2,0' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell2,1' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell2,2' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell2,3' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell2,4' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell2,5' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell2,6' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell2,7' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+			</tr>
+			<tr id='row3'>
+				<td id='cell3,0' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell3,1' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell3,2' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell3,3' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell3,4' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell3,5' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell3,6' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell3,7' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+			</tr>
+			<tr id='row4'>
+				<td id='cell4,0' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell4,1' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell4,2' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell4,3' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell4,4' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell4,5' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell4,6' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell4,7' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+			</tr>
+			<tr id='row5'>
+				<td id='cell5,0' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell5,1' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell5,2' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell5,3' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell5,4' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell5,5' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell5,6' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell5,7' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+			</tr>
+			<tr id='row6'>
+				<td id='cell6,0' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell6,1' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell6,2' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell6,3' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell6,4' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell6,5' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell6,6' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell6,7' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+			</tr>
+			<tr id='row7'>
+				<td id='cell7,0' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell7,1' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell7,2' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell7,3' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell7,4' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell7,5' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell7,6' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+				<td id='cell7,7' style='background-color:black;width:25;height:25;' onclick='if(this.style.backgroundColor == "red") {this.style.backgroundColor = "black"}else{this.style.backgroundColor = "red"}'>&nbsp;</td>
+			</tr>
+		</table>
+		</center>
+	<body>
+</html>

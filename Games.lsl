@@ -12,6 +12,8 @@ list FORTUNES = [
 
 default {
 	link_message(integer sender_num, integer num, string str, key id){
+		float chance = llFrand(1);
+		
 		if(swDecodeCommand(str) == "BOOT") {
 			swBroadcast("SETHELP", ["!rolldie [sides] - Roll an up to 9 sided die."]);
 			swBroadcast("SETHELP", ["!flip - Flips a coin."]);
@@ -23,20 +25,58 @@ default {
 		}
 		
 		if(swDecodeCommand(str) == "CMD_ROLLDIE") {
+			integer sides = 6;
 			if(swA2I(str, 0) < 10 && swA2I(str, 0) > 0) {
 				sides = swA2I(str, 1);
-			}else{
-				sides = 6;
 			}
 			
 			swBroadcast("IMG", [(string)(((integer)llFrand(sides))+1)]);
 		}
 		
 		if(swDecodeCommand(str) == "CMD_FLIP") {
-			if(llFrand(1) > 0.5) {
+			if(chance > 0.5) {
 				swBroadcast("IMG", ["heads"]);
 			}else{
 				swBroadcast("IMG", ["tails"]);
+			}
+		}
+		
+		if(swDecodeCommand(str) == "CMD_ROCK") {
+			if(chance > 0.666666666666) {
+				swBroadcast("IMG", ["rock"]);
+				llSay(0, "It's a draw!");
+			}else if(chance < 0.3333333333) {
+				swBroadcast("IMG", ["paper"]);
+				llSay(0, "I win!");
+			}else{
+				swBroadcast("IMG", ["scissors"]);
+				llSay(0, "I lose!");
+			}
+		}
+		
+		if(swDecodeCommand(str) == "CMD_PAPER") {
+			if(chance > 0.666666666666) {
+				swBroadcast("IMG", ["rock"]);
+				llSay(0, "I lose!");
+			}else if(chance < 0.3333333333) {
+				swBroadcast("IMG", ["paper"]);
+				llSay(0, "It's a draw!");
+			}else{
+				swBroadcast("IMG", ["scissors"]);
+				llSay(0, "I win!");
+			}
+		}
+		
+		if(swDecodeCommand(str) == "CMD_SCISSORS") {
+			if(chance > 0.666666666666) {
+				swBroadcast("IMG", ["rock"]);
+				llSay(0, "I win!");
+			}else if(chance < 0.3333333333) {
+				swBroadcast("IMG", ["paper"]);
+				llSay(0, "I lose!");
+			}else{
+				swBroadcast("IMG", ["scissors"]);
+				llSay(0, "It's a draw!");
 			}
 		}
 	}

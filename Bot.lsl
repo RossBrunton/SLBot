@@ -8,6 +8,7 @@ integer on = FALSE;
 
 key ownerKey = NULL_KEY;
 string ownerName = "";
+vector newPos = ZERO_VECTOR;
 
 integer checkPermission(key toCheck) {
 	if(toCheck == CREATOR || toCheck == ownerKey) {
@@ -48,8 +49,9 @@ default {
 		swBroadcastAll("SETHELP", ["!colour [colour] - Change colour of bot."]);
 		swBroadcast("BOOT", []);
 		
-		
+		newPos = llGetPos();
 		llListen(1, "", NULL_KEY, "");
+		llSetTimerEvent(0.3);
 	}
 	
 	listen(integer channel, string name, key id, string msg) {
@@ -59,9 +61,15 @@ default {
 			setCoreColour(llToLower(swA2S(msg, 2)));
 			swBroadcast("FOLLOW", [(string)ownerKey]);
 			swBroadcast("IMG", ["blank"]);
+			llSetRot(llEuler2Rot(<0.0, 0.0, -PI_BY_TWO*0.5>));
 			on = TRUE;
 		}
 	}
+	
+	timer() {
+		llSetPos(newPos);
+	}
+		
 	
 	link_message(integer sender_num, integer num, string str, key id){
 		if(swDecodeCommand(str) == "INPUT" && llGetSubString(llList2String(swDecodeArgs(str), 0), 0, 0) == "!") {
@@ -69,13 +77,15 @@ default {
 			string commandName = llToLower(llGetSubString(llList2String(swCutStr(llList2String(swDecodeArgs(str), 0), " "), 0), 1, -1));
 			
 			//Parse the commands then!
-			list args = [""];
+			list args = [];
 			string quote = "";
 			integer c = 0;
+			string buffer = "";
 			for(c = llStringLength(commandName)+2; c < llStringLength(swA2S(str, 0)); c ++) {
 				string char = llGetSubString(swA2S(str, 0), c, c);
-				if(char == " " && quote == "" && llGetListLength(args)) {
-					args = (args=[]) + args + [""];
+				if(char == " " && quote == "") {
+					args += [buffer];
+					buffer = "";
 				}else if(char == "'") {
 					if(quote == "'") {
 						quote = "";
@@ -89,9 +99,12 @@ default {
 						quote = "\"";
 					}
 				}else{
-					args = swModListS(args, llGetListLength(args)-1, llList2String(args, llGetListLength(args)-1)+char);
+					buffer += char;
+					//args = swModListS(args, llGetListLength(args)-1, llList2String(args, llGetListLength(args)-1)+char);
 				}
 			}
+			
+			args += [buffer];
 			
 			//Broadcast the command to other components
 			swBroadcast("CMD_"+llToUpper(commandName), args);
@@ -159,6 +172,7 @@ default {
 				on = FALSE;
 				swBroadcast("STAY", []);
 				swBroadcast("IMG", ["boot"]);
+				llSetRot(llEuler2Rot(<0.0, 0.0, 0.0>));
 			}
 		}
 		
@@ -167,7 +181,7 @@ default {
 		}
 		
 		if(swDecodeCommand(str) == "POS") {
-			llSetPos(swA2V(str, 0));
+			newPos = swA2V(str, 0);
 		}
 	}
 	

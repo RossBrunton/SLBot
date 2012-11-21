@@ -45,6 +45,21 @@ setCoreColour(string toSet) {
 	
 	llSetPrimitiveParams([PRIM_COLOR, ALL_SIDES, colour, 0.2, PRIM_POINT_LIGHT, TRUE, colour, 0.7, 10.0, 0.0]);
 	
+	//Particle effects
+	if(colour == <0.0, 0.0, 0.0>) {
+		llParticleSystem([]);
+	}else{
+		llParticleSystem([
+			PSYS_SRC_PATTERN, PSYS_SRC_PATTERN_DROP,
+			PSYS_PART_START_COLOR, colour,
+			PSYS_PART_START_ALPHA, 0.2,
+			PSYS_PART_MAX_AGE, 3,
+			PSYS_SRC_BURST_RATE, 0.1,
+			PSYS_SRC_BURST_PART_COUNT, 1,
+			PSYS_SRC_ACCEL, <0.0, 0.0, 0.0>
+		]);
+	}
+			
 }
 
 default {
@@ -144,7 +159,7 @@ default {
 				llSay(0, "-- List of Commands --");
 				integer i;
 				for(i = 0; i < llGetListLength(help); i ++) {
-					llSay(0, "> "+llList2String(help, i));
+					llSay(0, "| "+llList2String(help, i));
 				}
 			}
 			

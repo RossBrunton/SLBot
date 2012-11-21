@@ -24,6 +24,8 @@ list DISPLAYS = [
 	"stripes:1010101010101010101010101010101010101010101010101010101010101010",
 	"creeper:0000000001100110011001100001100000111100001111000010010000000000",
 	"boot:0000000001000010000110000011110000111100000110000100001000000000",
+	"checker:1010101001010101101010100101010110101010010101011010101001010101",
+	"square:0000000000000000001111000011110000111100001111000000000000000000",
 	"1:0000000000011000001110000001100000011000000110000011110000000000",
 	"2:0000000000011000001001000000010000001000000100000011110000000000",
 	"3:0000000000011000000001000001100000000100000001000001100000000000",
@@ -41,11 +43,23 @@ list DISPLAYS = [
 	"scissors:0000000000100100001001000010010000011000001001000110011000000000"
 ];
 
+//List of all images, for help
+string IMAGE_LIST = "blank, borders, stripes, square, checker, creeper, heads, tails, rock, paper, scissors, 0-9";
+
 //Start index
 integer START = 76;
 
+//Invert mode
+integer invert;
+
+//Current image
+string curImage;
+
 //Display an image
 drawImage(string image) {
+	//Set the image
+	curImage = image;
+	
     //Loop through all images looking for one with the name we want
     integer d;
     for(d = llGetListLength(DISPLAYS)-1; d >= 0; d --) {
@@ -59,7 +73,7 @@ drawImage(string image) {
             
             //And loop through all the prims and have them set their colour as appropriate
             for(i = 65; i >= 0; i --) {
-                if(llGetSubString(data, 65-i, 65-i) == "1") {
+                if((llGetSubString(data, 65-i, 65-i) == "1" && !invert) || (llGetSubString(data, 65-i, 65-i) == "0" && invert)) {
                     llSetLinkColor(START-i, <1, 0, 0>, ALL_SIDES);
                 }else{
                     llSetLinkColor(START-i, <0, 0, 0>, ALL_SIDES);
@@ -77,10 +91,28 @@ default {
 			drawImage(swA2S(str, 0));
 		}
 		
+		//List all the available images
+		if(swDecodeCommand(str) == "CMD_IMGLIST") {
+			llSay(0, "Images available: "+IMAGE_LIST);
+		}
+		
+		//Set invert
+		if(swDecodeCommand(str) == "CMD_INVERT") {
+			if(invert) {
+				invert = FALSE;
+			}else{
+				invert = TRUE;
+			}
+			
+			drawImage(curImage);
+		}
+		
 		//On bot startup
 		if(swDecodeCommand(str) == "BOOT") {
 			//Set the user help
 			swBroadcast("SETHELP", ["!img [image] - Display an image."]);
+			swBroadcast("SETHELP", ["!imglist - List all available images."]);
+			swBroadcast("SETHELP", ["!invert - Invert the colours on the screen."]);
 			
 			//Draw a blank image
 			drawImage("blank");

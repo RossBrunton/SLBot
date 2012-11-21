@@ -3,13 +3,20 @@
 // Part of bot pet thing.
 // Contains functions and state definition needed for the main bot unit
 
+//List of all help messages
 list help = [];
+
+//If the bot is currently turned on
 integer on = FALSE;
 
+//The owner of the bot
 key ownerKey = NULL_KEY;
 string ownerName = "";
+
+//The bot's position
 vector newPos = ZERO_VECTOR;
 
+//This checks permission of key, if it is the owner or me, it returns true
 integer checkPermission(key toCheck) {
 	if(toCheck == CREATOR || toCheck == ownerKey) {
 		return TRUE;
@@ -18,8 +25,9 @@ integer checkPermission(key toCheck) {
 	}
 }
 
+//Sets the colour of the bot's core. Specifying an unsupported colour will make it black.
 setCoreColour(string toSet) {
-	vector colour;
+	vector colour = <0.0, 0.0, 0.0>;
 	
 	if(toSet == "green") {
 		colour = <0.3, 1.0, 0.3>;
@@ -41,20 +49,29 @@ setCoreColour(string toSet) {
 
 default {
 	state_entry() {
+		//Set some help messages
 		swBroadcastAll("SETHELP", ["!say text1 [[text2] ...] - Say the arguments."]);
 		swBroadcastAll("SETHELP", ["!shout text1 [[text2] ...] - Shout the arguments."]);
 		swBroadcastAll("SETHELP", ["!creator - Information about creator."]);
 		swBroadcastAll("SETHELP", ["!owner - Says who owns the bot."]);
 		swBroadcastAll("SETHELP", ["!die - Bot is removed, and dies."]);
 		swBroadcastAll("SETHELP", ["!colour [colour] - Change colour of bot."]);
+		
+		//Send the boot message
 		swBroadcast("BOOT", []);
 		
+		//Set position
 		newPos = llGetPos();
+		
+		//Listen for messages
 		llListen(1, "", NULL_KEY, "");
+		
+		//Set the timer
 		llSetTimerEvent(0.3);
 	}
 	
 	listen(integer channel, string name, key id, string msg) {
+		//Initial startup, sent by the dispenser
 		if(swDecodeCommand(msg) == "STARTUP" && on == FALSE) {
 			ownerKey = (key)swA2S(msg, 0);
 			ownerName = swA2S(msg, 1);
@@ -67,16 +84,18 @@ default {
 	}
 	
 	timer() {
+		//Update position
 		llSetPos(newPos);
 	}
 		
 	
 	link_message(integer sender_num, integer num, string str, key id){
+		//Chat input, sent from the aerial
 		if(swDecodeCommand(str) == "INPUT" && llGetSubString(llList2String(swDecodeArgs(str), 0), 0, 0) == "!") {
 			//It's a command!
 			string commandName = llToLower(llGetSubString(llList2String(swCutStr(llList2String(swDecodeArgs(str), 0), " "), 0), 1, -1));
 			
-			//Parse the commands then!
+			//Parse the arguments
 			list args = [];
 			string quote = "";
 			integer c = 0;
@@ -100,7 +119,6 @@ default {
 					}
 				}else{
 					buffer += char;
-					//args = swModListS(args, llGetListLength(args)-1, llList2String(args, llGetListLength(args)-1)+char);
 				}
 			}
 			
@@ -126,7 +144,7 @@ default {
 				llSay(0, "-- List of Commands --");
 				integer i;
 				for(i = 0; i < llGetListLength(help); i ++) {
-					llSay(0, "| "+llList2String(help, i));
+					llSay(0, "> "+llList2String(help, i));
 				}
 			}
 			
@@ -176,10 +194,12 @@ default {
 			}
 		}
 		
+		//Set a new help message
 		if(swDecodeCommand(str) == "SETHELP") {
 			help += [swA2S(str, 0)];
 		}
 		
+		//Set a new position
 		if(swDecodeCommand(str) == "POS") {
 			newPos = swA2V(str, 0);
 		}

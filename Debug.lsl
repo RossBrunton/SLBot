@@ -7,11 +7,12 @@ integer debug = FALSE;
 
 default {
 	link_message(integer sender_num, integer num, string str, key id){
-		//Send debugging messages
+		//Send the message on chat messages only if DEBUG is true
 		if(debug == TRUE) {
 			llWhisper(1, (string)sender_num+" > "+str);
 		}
 		
+		//Turn on or off the debugging when !debug is ran
 		if(swDecodeCommand(str) == "CMD_DEBUG") {
 			if(debug) {
 				debug = FALSE;
@@ -22,6 +23,7 @@ default {
 			}
 		}
 		
+		//Set the initial help messages
 		if(swDecodeCommand(str) == "BOOT") {
 			swBroadcast("SETHELP", ["!debug - Turn debugging on or off."]);
 		}

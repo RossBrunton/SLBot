@@ -72,12 +72,17 @@ drawImage(string image) {
 
 default {
 	link_message(integer sender_num, integer num, string str, key id){
+		//Set the image
 		if(swDecodeCommand(str) == "CMD_IMG" || swDecodeCommand(str) == "IMG") {
 			drawImage(swA2S(str, 0));
 		}
 		
+		//On bot startup
 		if(swDecodeCommand(str) == "BOOT") {
+			//Set the user help
 			swBroadcast("SETHELP", ["!img [image] - Display an image."]);
+			
+			//Draw a blank image
 			drawImage("blank");
 		}
 	}

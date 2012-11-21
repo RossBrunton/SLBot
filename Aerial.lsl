@@ -5,11 +5,12 @@
 
 default {
 	state_entry() {
+		//Listen for all messages on public chat
 		llListen(0, "", "", "");
 	}
 
 	listen(integer channel, string name, key id, string message) {
-		//Check we have not said the message ourself
+		//Check we have not said the message ourself; loop through all objects and check the key of the sender
 		integer o;
 		for(o = llGetObjectPrimCount(llGetKey()); o >= 0; o--) {
 			if(llGetLinkKey(o) == id) {

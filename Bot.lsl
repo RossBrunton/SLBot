@@ -185,12 +185,12 @@ default {
 			}
 			
 			//Following
-			if(commandName == "follow") {
+			if(commandName == "follow" && checkPermission(swA2K(str, 1))) {
 				swBroadcast("FOLLOW", [(string)ownerKey]);
 			}
 			
 			//Stay
-			if(commandName == "stay") {
+			if(commandName == "stay" && checkPermission(swA2K(str, 1))) {
 				swBroadcast("STAY", []);
 			}
 			

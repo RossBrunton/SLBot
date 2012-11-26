@@ -47,7 +47,7 @@ list DISPLAYS = [
 string IMAGE_LIST = "blank, borders, stripes, square, checker, creeper, heads, tails, rock, paper, scissors, 0-9";
 
 //Start index
-integer START = 76;
+integer START = 86;
 
 //Invert mode
 integer invert;

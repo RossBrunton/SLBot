@@ -29,15 +29,13 @@ list swCutStr(string str, string cutter) {
 }
 
 //Parses a string that is a message and gets its command, returns "INVALID" if the string cannot be parsed
-//Not complete, doesn't validate
 //// message - A message from another bot component
-//// return - The name of the command that was requested, or "INVALID"
+//// return - The name of the command that was requested
 string swDecodeCommand(string message) {
 	return llList2String(swCutStr(message, SEPERATION_CHAR), 0);
 }
 
 //Parses a string that is a message and gets it's arguments, returns [] if the string cannot be parsed. First element will NOT be the command name.
-//Not complete, doesn't validate
 //// message - A message from another bot component
 //// return - A list of all the arguments for the requested command, all elements are strings
 list swDecodeArgs(string message) {

@@ -39,9 +39,17 @@ default {
 			target = llList2Vector(llGetObjectDetails(targetKey, [OBJECT_POS]), 0) + <3.0, 3.0, 3.0>;
 		}
 		
+		//Check if in bounds
+		if(target.x < 0.0) {target.x = 0.1;}
+		if(target.y < 0.0) {target.y = 0.1;}
+		if(target.z < 0.0) {target.z = 0.1;}
+		
+		if(target.x > 256.0) {target.x = 255.9;}
+		if(target.y > 256.0) {target.y = 255.9;}
+		if(target.z > 256.0) {target.z = 255.9;}
+		
 		//And head there
-		if(target.x != 3.0 && target.y != 0.3 && target.z != 0.3 && target != ZERO_VECTOR
-		&& target.x > 0.0 && target.x < 256.0 && target.y > 0.0 && target.y < 256.0 && target.z > 0.0 && target.z < 256.0) {
+		if(target.x != 3.0 && target.y != 0.3 && target.z != 0.3 && target != ZERO_VECTOR) {
 			swBroadcast("POS", [target]);
 		}
 	}
